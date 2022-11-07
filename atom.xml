@@ -15,7 +15,7 @@
         <link rel="alternate" href="https://dr34nn.github.io/2022/11/07/Windows7%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81%E5%87%BA%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
         <content type="html">&lt;p&gt;最近为了准备 ISCTF 的套娃题，想起来可以外层套一个取证的皮，但是本来的环境因为电脑重装就无了，所以重新用虚拟机搭了一个 Win7 的环境，然后遇到了几个之前遇到过的问题，那个时候没有记录，导致配环境浪费了很多时间，这边就小小的记录一下吧。&lt;/p&gt;
 &lt;h3 id=&#34;写在开头&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#写在开头&#34;&gt;#&lt;/a&gt; 写在开头：&lt;/h3&gt;
-&lt;p&gt;win7 取证的话，内存建议开大一点，给 25g，他自身好像是占了 13g，然后一些补丁后续要加，我尝试了 20G，内存不够，25G 就足够的空间了&lt;/p&gt;
+&lt;p&gt;win7 取证的话，硬盘容量建议开大一点，给 25g，他自身好像是占了 13g，然后一些补丁后续要加，我尝试了 20G，容量不够，25G 就足够的空间了&lt;/p&gt;
 &lt;h3 id=&#34;step1环境镜像&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#step1环境镜像&#34;&gt;#&lt;/a&gt; Step1: 环境镜像&lt;/h3&gt;
 &lt;p&gt;​	我使用的是 VMware 搭的虚拟机，去官网下的镜像，这边就直接放一篇博客了，&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjQ5MDAxL2FydGljbGUvZGV0YWlscy8xMDU5ODkxNzMjOn46dGV4dD0lRTklOTUlOUMlRTUlODMlOEYlRTclOUElODQlRTQlQjglOEIlRTglQkQlQkQlMjAlRTclOTklQkUlRTUlQkElQTYlRTclQkQlOTElRTclOUIlOTglRTUlOUMlQjAlRTUlOUQlODAsJTI4JUU1JUI3JUIyJUU0JUI4JThCJUU4JUJEJUJEJUU1JUE1JUJEd2luZG93c3M3JTIwNjQlMjklM0ElRTklOTMlQkUlRTYlOEUlQTUlRUYlQkMlOUFodHRwcyUzQSUyRiUyRnBhbi5iYWlkdS5jb20lMkZzJTJGMWpQanFJVElfVTlmNXYzdG5pczFGLWclMjAlRTYlOEYlOTAlRTUlOEYlOTYlRTclQTAlODElRUYlQkMlOUFyYmg0&#34;&gt;参考博客&lt;/span&gt;，镜像版本选取什么应该大抵是没什么问题的，实在要参考的话，我这边选择的是这款，怎么有两款，忘了是哪款了，自己试试吧，应该是 64 位的那款。&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/df339ed69054455c9386a0cfe2774bcc.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;

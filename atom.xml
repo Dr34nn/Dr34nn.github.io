@@ -8,11 +8,11 @@
     <author>
       <name>Dr34m</name>
     </author>
-    <updated>2022-07-05T16:00:00.000Z</updated>
+    <updated>2022-11-06T16:00:00.000Z</updated>
     <entry>
-        <id>https://dr34nn.github.io/2022/07/06/Windows7%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81%E5%87%BA%E9%A2%98%E8%AE%B0%E5%BD%95/</id>
+        <id>https://dr34nn.github.io/2022/11/07/Windows7%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81%E5%87%BA%E9%A2%98%E8%AE%B0%E5%BD%95/</id>
         <title>Windows7内存取证出题记录</title>
-        <link rel="alternate" href="https://dr34nn.github.io/2022/07/06/Windows7%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81%E5%87%BA%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+        <link rel="alternate" href="https://dr34nn.github.io/2022/11/07/Windows7%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81%E5%87%BA%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
         <content type="html">&lt;p&gt;最近为了准备 ISCTF 的套娃题，想起来可以外层套一个取证的皮，但是本来的环境因为电脑重装就无了，所以重新用虚拟机搭了一个 Win7 的环境，然后遇到了几个之前遇到过的问题，那个时候没有记录，导致配环境浪费了很多时间，这边就小小的记录一下吧。&lt;/p&gt;
 &lt;h3 id=&#34;写在开头&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#写在开头&#34;&gt;#&lt;/a&gt; 写在开头：&lt;/h3&gt;
 &lt;p&gt;win7 取证的话，内存建议开大一点，给 25g，他自身好像是占了 13g，然后一些补丁后续要加，我尝试了 20G，内存不够，25G 就足够的空间了&lt;/p&gt;
@@ -53,7 +53,7 @@
         <category term="MISC" scheme="https://dr34nn.github.io/categories/MISC/" />
         <category term="取证" scheme="https://dr34nn.github.io/categories/MISC/%E5%8F%96%E8%AF%81/" />
         <category term="出题记录" scheme="https://dr34nn.github.io/tags/%E5%87%BA%E9%A2%98%E8%AE%B0%E5%BD%95/" />
-        <updated>2022-07-05T16:00:00.000Z</updated>
+        <updated>2022-11-06T16:00:00.000Z</updated>
     </entry>
     <entry>
         <id>https://dr34nn.github.io/2022/07/06/vulnhub-JANGOW/</id>

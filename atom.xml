@@ -60,6 +60,7 @@
         <title>《套神看了都摇头》出题记录</title>
         <link rel="alternate" href="https://dr34nn.github.io/2022/11/07/%E5%A5%97%E7%A5%9E%E7%9C%8B%E4%BA%86%E9%83%BD%E6%91%87%E5%A4%B4-%E5%87%BA%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
         <content type="html">&lt;p&gt;写在开头：想把 misc 的一些简单的知识点串在一起，更考核选手的综合能力，但是胡乱的套会导致其中解码过程中出现很多的错误，所以需要给选手一些明确的 hint，比如用什么网站进行的加密，比如一个简单的例子，千千秀字的栅栏，用 bugku 是解不出来的（反正我枚举解不出，就当他解不出了），这些知识点都是我学习 misc 刚开始一个月里面刷的题，所以就选用了过来。&lt;/p&gt;
+&lt;p&gt;WP 就不写啦！太套了，我做了一半都反胃了&lt;/p&gt;
 &lt;h3 id=&#34;flag&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#flag&#34;&gt;#&lt;/a&gt; flag&lt;/h3&gt;
 &lt;p&gt;首先拿到了一个 flag&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ISCTF&amp;#123;W0_b8_4_t4O_sH3n_!!!_Sh31_4_t40_sheN&amp;#125;

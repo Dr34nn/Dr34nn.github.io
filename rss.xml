@@ -68,7 +68,8 @@
             <description><![CDATA[ &lt;p&gt;写在开头：想把 misc 的一些简单的知识点串在一起，更考核选手的综合能力，但是胡乱的套会导致其中解码过程中出现很多的错误，所以需要给选手一些明确的 hint，比如用什么网站进行的加密，比如一个简单的例子，千千秀字的栅栏，用 bugku 是解不出来的（反正我枚举解不出，就当他解不出了），这些知识点都是我学习 misc 刚开始一个月里面刷的题，所以就选用了过来。&lt;/p&gt;
 &lt;h3 id=&#34;flag&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#flag&#34;&gt;#&lt;/a&gt; flag&lt;/h3&gt;
 &lt;p&gt;首先拿到了一个 flag&lt;/p&gt;
-&lt;p W0_b8_4_t4O_sH3n_!!!_Sh31_4_t40_sheN=&#34;&#34;&gt;ISCTF&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ISCTF&amp;#123;W0_b8_4_t4O_sH3n_!!!_Sh31_4_t40_sheN&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;千千秀字栅栏&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#千千秀字栅栏&#34;&gt;#&lt;/a&gt; 千千秀字栅栏&lt;/h3&gt;
 &lt;p&gt;给出了一个千千秀字的 hint，先留档&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;IW4s!10&amp;#125;S0_H!__C_t3_4sTb4nS_hF8O_hte&amp;#123;__!34N
